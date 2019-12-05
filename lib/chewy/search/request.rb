@@ -51,6 +51,7 @@ module Chewy
       alias_method :to_ary, :to_a
       alias_method :total_count, :total
       alias_method :total_entries, :total
+      alias_method :count, :total
 
       # The class is initialized with the list of chewy indexes and/or
       # types, which are later used to compose requests.
@@ -801,21 +802,6 @@ module Chewy
       end
 
       # @!group Additional actions
-
-      # Returns total count of hits for the request. If the request
-      # was already performed - it uses the `total` value, otherwise
-      # it executes a fast count request.
-      #
-      # @return [Integer] total hits count
-      def count
-        if performed?
-          total
-        else
-          Chewy.client.count(only(WHERE_STORAGES).render)['count']
-        end
-      rescue Elasticsearch::Transport::Transport::Errors::NotFound
-        0
-      end
 
       # Checks if any of the document exist for this request. If
       # the request was already performed - it uses the `total`,
