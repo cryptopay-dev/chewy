@@ -19,7 +19,7 @@ module Chewy
         @hits ||= hits_root['hits'] || []
       end
 
-      # Response `total` field. Returns `0` if something went wrong.
+      # Amount of entries in raw response 'hits' collection.
       #
       # @return [Integer]
       def total
